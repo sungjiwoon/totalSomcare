@@ -64,7 +64,15 @@ def socketProgramming(host, portNum, getMsg):
     c.send(str(getMsg[1]).encode())
     c.close() 
 
-while True :   
+while True :
+    con = pymysql.connect(
+    host = "3.34.98.103",
+    user = "totalSOM", 
+    password = "rhdgkdrlavh4536",
+    database = "tsDB",
+    charset = 'utf8'
+    ) 
+
     sql = "Select * from airSensorInfo ORDER BY date DESC LIMIT 1" #air 최근 행 1개 가져오기
     cur.execute(sql)
     data1 = cur.fetchone()
@@ -98,7 +106,7 @@ while True :
     data5 = cur.fetchone()
     list5 = list(data5)
     list5[0] = 5
-    data1 = tuple(list5)   
+    data5 = tuple(list5)   
     
     getMsg1 = autoCheck(data1)
     getMsg2 = autoCheck(data2)
@@ -106,24 +114,30 @@ while True :
     getMsg4 = autoCheck(data4)
     getMsg5 = autoCheck(data5)
     
+    print(getMsg1)
+    print(getMsg2)
+    print(getMsg3)
+    print(getMsg4)
+    print(getMsg5)
+    
     if getMsg1 != -1 :
         if getMsg1[0] == 1 :
-            socketProgramming('192.168.25.5', 9999, getMsg1)   
+            socketProgramming('192.168.1.16', 10002, getMsg1)     
             
     if getMsg2 != -1 :
         if getMsg2[0] == 2 :
-            socketProgramming('192.168.25.5', 9999, getMsg2)
+            socketProgramming('192.168.1.13', 10012, getMsg2)
     
     if getMsg3 != -1 :
         if getMsg3[0] == 3 :
-            socketProgramming('192.168.25.5', 9999, getMsg3)
+            socketProgramming('192.168.1.18', 10022, getMsg3)
         
     if getMsg4 != -1 :
         if getMsg4[0] == 4 :
-            socketProgramming('192.168.25.5', 9999, getMsg4)
+            socketProgramming('192.168.1.17', 10032, getMsg4)
             
     if getMsg5 != -1 :
         if getMsg5[0] == 5 :
-            socketProgramming('192.168.25.5', 9999, getMsg5)
+            socketProgramming('192.168.1.15', 10042, getMsg5)
     
     time.sleep(3)
