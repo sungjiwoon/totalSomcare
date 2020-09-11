@@ -115,7 +115,7 @@ def handler (client_socket, addr) :
     
 #멀티 쓰레드 코드
 if __name__ == '__main__':
-    HOST = '192.168.25.3' #연결하는 와이파이에 따라 변경해야 됨
+    HOST = '192.168.1.14' #연결하는 와이파이에 따라 변경해야 됨
     PORT = 8888 
     ADDR = (HOST, PORT)
     
