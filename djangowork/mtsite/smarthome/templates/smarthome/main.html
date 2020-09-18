@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>메인페이지</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="150;url=http://localhost:8000">
+    <script>
+		function test() {
+            window.onkeydown = function(e) {
+                if(e.keyCode == 116 || e.ctrlKey == true && (e.keyCode == 82)) {
+                    history.replaceState({}, null, location.pathname);
+                }
+            }
+		}
+
+        function CallbackFunction(event) {
+            if(window.event) {
+                if (window.event.clientX < 40 && window.event.clientY < 0) {
+                   
+                } else{
+                    history.replaceState({}, null, location.pathname);
+                }
+            } else{
+                if (event.currentTarget.performance.navigation.type == 1) {
+                    history.replaceState({}, null, location.pathname);
+                }           
+            }
+        }
+    </script>
+    <style>
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        button {
+            border : none;
+            width: 35px;
+            height: 35px;
+            background-color: transparent;
+        }
+
+        table {
+            margin: auto;
+            width: 80%;
+            border-spacing: 10px;
+        }
+
+        .onauto {
+            color : rgb(53, 163, 228);
+        }
+
+        .offauto {
+            color : rgb(231, 237, 241);
+        }
+
+        td {
+            background-color: #E8EDF1;
+            padding: 3% 3% 3% 3%;
+            border-radius: 8px;
+        }
+
+        #airconditioner_div, #air_div, #rain_div {
+            float: left;
+            clear: left;
+        }
+
+        #boiler_div, #gas_div, #motion_div {
+            float: right;
+        }
+
+        #wrap_sensor {
+            height: fit-content;
+            overflow: auto;
+        }
+
+        #title, #login, #main_weather {
+            text-align: center;
+        }
+
+        #title {
+            
+            margin: 10% 0% 0% 0%;
+            
+            padding-bottom: 0%;
+            font-weight: 500;
+        }
+        .logo_img {
+            width : 30%;
+            display: block; 
+            margin: 0px auto;
+        }
+        
+
+        #login {
+            color: #EEEEEE;
+            margin: -1% 0% 0% 0%;
+            font-size: 90%;
+            padding: 2% 0% 4% 0%;
+        }
+
+        #weather_div {
+            overflow: auto;
+            background-image: url(/static/img/bluebox1.png);
+            width: 75%;
+            margin: auto;
+            text-align: center;
+            align-items: center;
+            margin-bottom: 10%;
+        }
+
+        #main_weather {
+            font-size: 90%; 
+            color: white;
+            padding: 4% 0% 4% 0%;
+            margin: auto;
+            width: fit-content;
+            text-align: right;
+            display: inline-block;
+        } 
+
+        #weather_img_div {
+            overflow: auto;
+            text-align: center;
+            align-items:center;
+            display: inline;
+            vertical-align: middle;
+        }
+
+        .weather_img {
+            display: inline-block;
+            width: 7%;
+            height: auto;
+        }
+
+        .title, .is_auto, .btn, .arrow {
+            display: inline-flex;
+            align-self: right;
+        }
+
+        .arrow, .is_auto {
+            float: right;
+        }
+
+        .arrow {
+            width: 30px;
+            height: 30px;
+        }
+
+        .value span {
+            font-size: 60%;
+            color: #70A3DC;
+            vertical-align: text-top;
+        }
+
+        .no_value span {
+            border: 1px transparent solid;
+        }
+
+        .air_td {
+            background-image: url(/static/img/bluebox2.png);
+            width: 50%;
+        }
+
+        .window_td {
+            width: 50%;
+        }
+
+        #air_title, #air_value span {
+            color: #C8E7F9;
+        }
+
+        #air_onauto {
+            color: white;
+        }
+
+        #air_offauto {
+            color: #3389BA;
+        }
+
+        #td_1 {
+            width: 60%;
+        }
+
+        #motion_title {
+            width: 50%;
+        }
+
+    </style>
+</head>
+<body onload="test(); CallbackFunction();">
+    <div class="container">
+    <form  method = "GET" >
+        <div>
+            <p id="title"><img src = "/static/img/icon_logo1.png" class="logo_img"></p>
+            <p id="login">login / sign up</p>
+        </div>
+        <div id="weather_div">
+            <p id="main_weather">Today's weather &nbsp;</p>
+            {% if rain.situation == 1 %}
+            <div id="weather_img_div">
+                <img src = "/static/img/weather_rain.png" class="weather_img">
+                {% endif %}
+                {% if rain.situation == 0 %}
+                <img src = "/static/img/weather_sun.png" class="weather_img">
+                {% endif %}
+            </div>
+        </div>
+        </div>
+
+        <table>
+            <tr>
+                <td id="td_1">
+                    <div class="title" id="aircon_title">air conditioner</div>
+                    <div class="is_auto" id="aircon_is_auto">
+                        {% if temp.is_auto == 1 %}
+                        <span class = "onauto">auto</span> 
+                        {% endif %}
+                        {% if temp.is_auto == 0 or temp.is_auto == -1 %}
+                        <span class = "offauto">auto</span>
+                        {% endif %}
+                    </div>
+                    <div class="value" id="aircon_value"><span>기온:{{ temp.temp_value }}℃  |  습도:{{ temp.humid_value }}%</span></div>
+                    <div class="btn" id="aircon_btn">
+                        {% if temp.situation == 0 %}
+                        <input type="hidden" name="temp_is_auto" value="0"/> <!--이렇게 되면 새로고침할 때 매개변수로 다 들어가서 안될 것 같은데..-->
+                        <button type = "submit" name = "temp_condition" value = "2" ><img alt="전원 꺼진 상태" src = "/static/img/icon_onoff_gray.png"></img></button> 
+                        {% endif %}
+                        {% if temp.situation == 2 or temp.situation == 1%}
+                        <input type="hidden" name="temp_is_auto" value="0"/> 
+                        <button type = "submit" name = "temp_condition" value = "0"><img alt="전원 켜진 상태" src = "/static/img/icon_onoff_sky.png"></img></button> 
+                        {% endif %}
+                    </div>
+                    <div class="arrow" id="aircon_arrow"><a href="airconditioner/{{temp}}/"><img src="/static/img/icon_detail_page.png" alt="상세페이지 이동"></img></a></div>
+                
+                    <!--
+                    <div class="is_auto" id="boiler_is_auto"> 
+                        {% if temp.is_auto == 1 %}
+                        <span class = "onauto"></span>
+                        {% endif %}
+                        {% if temp.is_auto == 0 or temp.is_auto == -1 %}
+                        <span class = "offauto">auto</span>
+                        {% endif %}
+                    </div> -->
+                    <div class="no_value" id="boiler_value"><span> </span></div>
+                    <div class="no_value" id="boiler_value"><span> </span></div>
+                    <div class="btn" id="boiler_btn">
+                        {% if temp.situation == 0 %}
+                        <input type="hidden" name="temp_is_auto" value="0"/> 
+                        <button type = "submit" name = "temp_condition" value = "1" ><img src = "/static/img/icon_onoff_gray.png"></img></button> 
+                        {% endif %}
+                        {% if temp.situation == 2 or temp.situation == 1%}
+                        <input type="hidden" name="temp_is_auto" value="0"/> 
+                        <button type = "submit" name = "temp_condition" value = "0"><img src = "/static/img/icon_onoff_sky.png"></img></button> 
+                        {% endif %}
+                    </div>
+                    <div class="arrow" id="aircon_arrow"><a href="airconditioner/{{temp}}/"><img src="/static/img/icon_detail_page.png" alt="상세페이지 이동"></img></a></div>                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="air_td">
+                    <div class="title" id="air_title">air cleaner</div>
+                    <div class="is_auto" id="air_is_auto">
+                        {% if air.is_auto == 1 %}
+                        <span class = "onauto" id="air_onauto">auto</span> 
+                        {% endif %}
+                        {% if air.is_auto == 0 or air.is_auto == -1 %}
+                        <span class = "offauto" id="air_offauto">auto</span> 
+                        {% endif %}
+                    </div>
+                    <div class="value" id="air_value">
+                        <span>pm2.5: {{ air.air1_value }}㎛  |  pm10.0: {{ air.air2_value }}㎛</span>
+                        {% if air.situation == 1 %}
+                        <!-- <img/> 초록색 동그라미-->
+                        {% endif %}
+                        {% if air.situation == 2 %}
+                        <!-- <img/> 노란색 동그라미-->
+                        {% endif %}
+                        {% if air.situation == 1 %}
+                        <!-- <img/> 빨간색 동그라미-->
+                        {% endif %}
+                    </div>
+                    <div class="btn" id="air_btn">
+                        {% if air.situation == 0 %}
+                        <input type="hidden" name="air_is_auto" value="1"/> 
+                        <button type = "submit" name = "air_condition" value = "1" ><img src = "/static/img/icon_onoff_gray.png"></img></button> 
+                        {% endif %}
+                        {% if air.situation == 3 or air.situation == 2 or air.situation == 1 %}
+                        <input type="hidden" name="air_is_auto" value="-1"/> 
+                        <button type = "submit" name = "air_condition" value = "0"><img src = "/static/img/icon_onoff_white.png"></img></button> 
+                        {% endif %}
+                    </div>
+                    <div class="arrow" id="aircon_arrow"><a href="aircleaner/{{air}}/"><img src="/static/img/icon_detail_page.png" alt="상세페이지 이동"></img></a></div>                </td>
+                
+                    <!------------------------가스------------------------------------>
+                <td>
+                    <div class="title" id="gas_title">gas</div>
+                    <div class="is_auto" id="gas_is_auto">
+                        {% if gas.is_auto == 1 %}
+                        <span class = "onauto">auto</span>
+                        {% endif %}
+                        {% if gas.is_auto == 0 or gas.is_auto == -1 %}
+                        <span class = "offauto">auto</span>
+                        {% endif %}
+                    </div>
+                    <div class="value" id="gas_value"><span>가스 농도: {{ gas.gas_value }}%</span></div>
+                    <div class="btn" id="gas_btn">
+                        {% if gas.situation == 0 %}
+                        <input type="hidden" name="gas_is_auto" value="0"/> 
+                        <button type = "submit" name = "gas_condition" value = "1" ><img src = "/static/img/icon_onoff_gray.png"></img></button> 
+                        {% endif %}
+                        {% if gas.situation == 2 or gas.situation == 1%}
+                        <input type="hidden" name="gas_is_auto" value="0"/> 
+                        <button type = "submit" name = "gas_condition" value = "0"><img src = "/static/img/icon_onoff_sky.png"></img></button> 
+                        {% endif %}
+                    </div>
+                    <div class="arrow" id="aircon_arrow"><a href="gas/{{gas}}/"><img src="/static/img/icon_detail_page.png" alt="상세페이지 이동"></img></a></div>                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <!------------------------창문------------------------------------>
+                <td class="window_td">
+                    <div class="title" id="rain_title">window</div>
+                    <div class="is_auto" id="rain_is_auto">
+                        {% if rain.is_auto == 1 %}
+                        <span class = "onauto">auto</span>
+                        {% endif %}
+                        {% if rain.is_auto == 0 or rain.is_auto == -1 %}
+                        <span class = "offauto">auto</span>
+                        {% endif %}
+                    </div>
+                    <div class="no_value" id="rain_value"><span> </span></div>
+                    <div class="btn" id="rain_btn">
+                        {% if rain.situation == 0 %}
+                        <input type="hidden" name="rain_is_auto" value="0"/> 
+                        <button type = "submit" name = "rain_condition" value = "1" ><img src = "/static/img/icon_onoff_gray.png"></img></button> 
+                        {% endif %}
+                        {% if rain.situation == 2 or rain.situation == 1 %}
+                        <input type="hidden" name="rain_is_auto" value="0"/> 
+                        <button type = "submit" name = "rain_condition" value = "0"><img src = "/static/img/icon_onoff_sky.png"></img></button> 
+                        {% endif %}
+                    </div>
+                    <div class="arrow" id="aircon_arrow"><a href="window/{{rain}}/"><img src="/static/img/icon_detail_page.png" alt="상세페이지 이동"></img></a></div>                </td>
+                
+                <td> <!------------------------램프------------------------------------>
+                    <div class="title" id="motion_title">livingroom lamp</div>
+                    <div class="is_auto" id="motion_is_auto">
+                        {% if motion.is_auto == 1 %}
+                        <span class = "onauto">auto</span> 
+                        {% endif %}
+                        {% if motion.is_auto == 0 or motion.is_auto == -1 %}
+                        <span class = "offauto">auto</span>
+                        {% endif %}
+                    </div>
+                    <div class="no_value" id="motion_value"><span> </span></div>
+                    <div class="btn" id="motion_btn">
+                        {% if motion.situation == 0 %}
+                        <input type="hidden" name="motion_is_auto" value="0"/>
+                        <button type = "submit" name = "motion_condition" value = "1" ><img src = "/static/img/icon_onoff_gray.png"></img></button> 
+                        {% endif %}
+                        {% if motion.situation == 2 or motion.situation == 1%}
+                        <input type="hidden" name="motion_is_auto" value="0"/> 
+                        <button type = "submit" name = "motion_condition" value = "0"><img src = "/static/img/icon_onoff_sky.png"></img></button> 
+                        {% endif %}
+                    </div>
+                    <div class="arrow" id="aircon_arrow"><a href="lamp/{{motion}}/"><img src="/static/img/icon_detail_page.png" alt="상세페이지 이동"></img></a></div>                </td>
+            </tr>
+        </table>
+
+<!--         
+        <div id="wrap_sensor">
+            <div class="sensor_div" id="airconditioner_div">
+                <div class="title" id="aircon_title">air conditioner</div>
+                <div class="is_auto" id="aircon_is_auto">
+                    {% if temp.is_auto == 1 %}
+                    <span class = "onauto">auto</span> 
+                    {% endif %}
+                    {% if temp.is_auto == 0 or temp.is_auto == -1 %}
+                    <span class = "offauto">auto</span>
+                    {% endif %}
+                </div>
+                <div class="value" id="aircon_value"><p>기온:{{ temp.temp_value }}℃  |  습도:{{ temp.humid_value }}%</p></div>
+                <div class="btn" id="aircon_btn">
+                    {% if temp.situation == 0 %}
+                    <input type="hidden" name="temp_is_auto" value="1"/>
+                    <button type = "submit" name = "temp_condition" value = "2" ><image src = "/static/img/icon_onoff_gray.png"></image></button> 
+                    {% endif %}
+                    {% if temp.situation == 2 or temp.situation == 1%}
+                    <input type="hidden" name="temp_is_auto" value="-1"/> 
+                    <button type = "submit" name = "temp_condition" value = "0"><image src = "/static/img/icon_onoff_sky.png"></image></button> 
+                    {% endif %}
+                </div>
+                <div class="arrow" id="aircon_arrow"><a href="airconditioner/{{temp}}/">화살표</a></div>
+            </div>
+
+
+            <div class="sensor_div" id="boiler_div">
+                <div class="title" id="boiler_title">boiler</div>
+                <div class="is_auto" id="boiler_is_auto">
+                    {% if boiler.is_auto == 1 %}
+                    <span class = "onauto">auto</span>
+                    {% endif %}
+                    {% if boiler.is_auto == 0 or boiler.is_auto == -1 %}
+                    <span class = "offauto">auto</span>
+                    {% endif %}
+                </div>
+                <div class="value" id="boiler_value"><p></p></div>
+                <div class="btn" id="boiler_btn">
+                    {% if temp.situation == 0 %}
+                    <input type="hidden" name="temp_is_auto" value="1"/> 
+                    <button type = "submit" name = "temp_condition" value = "2" ><image src = "/static/img/icon_onoff_gray.png"></image></button> 
+                    {% endif %}
+                    {% if temp.situation == 2 or temp.situation == 1%}
+                    <input type="hidden" name="temp_is_auto" value="-1"/> 
+                    <button type = "submit" name = "temp_condition" value = "0"><image src = "/static/img/icon_onoff_sky.png"></image></button> 
+                    {% endif %}
+                </div>
+                <div class="arrow" id="aircon_arrow">화살표</div>
+            </div>
+
+
+            <div id="air_div">
+                <div class="title" id="air_title">air cleaner</div>
+                <div class="is_auto" id="air_is_auto">
+                    {% if air.is_auto == 1 %}
+                    <span class = "onauto" id="air_onauto">auto</span> 
+                    {% endif %}
+                    {% if air.is_auto == 0 or air.is_auto == -1 %}
+                    <span class = "offauto" id="air_offauto">auto</span> 
+                    {% endif %}
+                </div>
+                <div class="value" id="air_value">
+                    <p>pm2.5: {{ air.air1_value }}㎛  |  pm10.0: {{ air.air2_value }}㎛</p>
+                    {% if air.situation == 1 %} -->
+                    <!-- <img/> 초록색 동그라미-->
+                    {% endif %}
+                    {% if air.situation == 2 %}
+                    <!-- <img/> 노란색 동그라미-->
+                    {% endif %}
+                    {% if air.situation == 1 %}
+                    <!-- <img/> 빨간색 동그라미-->
+                    {% endif %}
+                <!-- </div>
+                <div class="btn" id="air_btn">
+                    {% if air.situation == 0 %}
+                    <input type="hidden" name="air_is_auto" value="1"/> 
+                    <button type = "submit" name = "air_condition" value = "1" ><image src = "/static/img/icon_onoff_gray.png"></image></button> 
+                    {% endif %}
+                    {% if air.situation == 3 or air.situation == 2 or air.situation == 1 %}
+                    <input type="hidden" name="air_is_auto" value="-1"/> 
+                    <button type = "submit" name = "air_condition" value = "0"><image src = "/static/img/icon_onoff_white.png"></image></button> 
+                    {% endif %}
+                </div>
+                <div class="arrow" id="aircon_arrow">화살표</div>
+            </div>
+
+
+            <div class="sensor_div" id="gas_div">
+                <div class="title" id="gas_title">gas</div>
+                <div class="is_auto" id="gas_is_auto">
+                    {% if gas.is_auto == 1 %}
+                    <span class = "onauto">auto</span>
+                    {% endif %}
+                    {% if gas.is_auto == 0 or gas.is_auto == -1 %}
+                    <span class = "offauto">auto</span>
+                    {% endif %}
+                </div>
+                <div class="value" id="gas_value"><p>가스 농도: {{ gas.gas_value }}%</p></div>
+                <div class="btn" id="gas_btn">
+                    {% if gas.situation == 0 %}
+                    <input type="hidden" name="gas_is_auto" value="1"/> 
+                    <button type = "submit" name = "gas_condition" value = "2" ><image src = "/static/img/icon_onoff_gray.png"></image></button> 
+                    {% endif %}
+                    {% if gas.situation == 2 or gas.situation == 1%}
+                    <input type="hidden" name="gas_is_auto" value="-1"/> 
+                    <button type = "submit" name = "gas_condition" value = "0"><image src = "/static/img/icon_onoff_sky.png"></image></button> 
+                    {% endif %}
+                </div>
+                <div class="arrow" id="gas_arrow">화살표</div>
+            </div>
+
+
+            <div class="sensor_div" id="rain_div">
+                <div class="title" id="rain_title">window</div>
+                <div class="is_auto" id="rain_is_auto">
+                    {% if rain.is_auto == 1 %}
+                    <span class = "onauto">auto</span>
+                    {% endif %}
+                    {% if rain.is_auto == 0 or window.is_auto == -1 %}
+                    <span class = "offauto">auto</span>
+                    {% endif %}
+                </div>
+                <div class="value" id="rain_value"><p></p></div>
+                <div class="btn" id="rain_btn">
+                    {% if rain.situation == 0 %}
+                    <input type="hidden" name="rain_is_auto" value="1"/> 
+                    <button type = "submit" name = "rain_condition" value = "2" ><image src = "/static/img/icon_onoff_gray.png"></image></button> 
+                    {% endif %}
+                    {% if rain.situation == 2 or rain.situation == 1%}
+                    <input type="hidden" name="rain_is_auto" value="-1"/> 
+                    <button type = "submit" name = "rain_condition" value = "0"><image src = "/static/img/icon_onoff_sky.png"></image></button> 
+                    {% endif %}
+                </div>
+                <div class="arrow" id="rain_arrow">화살표</div>
+            </div>
+
+
+            <div class="sensor_div" id="motion_div">
+                <div class="title" id="motion_title">livingroom lamp</div>
+                <div class="is_auto" id="motion_is_auto">
+                    {% if motion.is_auto == 1 %}
+                    <span class = "onauto">auto</span> 
+                    {% endif %}
+                    {% if motion.is_auto == 0 or motion.is_auto == -1 %}
+                    <span class = "offauto">auto</span>
+                    {% endif %}
+                </div>
+                <div class="value" id="motion_value"><p></p></div>
+                <div class="btn" id="motion_btn">
+                    {% if motion.situation == 0 %}
+                    <input type="hidden" name="motion_is_auto" value="1"/>
+                    <button type = "submit" name = "motion_condition" value = "2" ><image src = "/static/img/icon_onoff_gray.png"></image></button> 
+                    {% endif %}
+                    {% if motion.situation == 2 or motion.situation == 1%}
+                    <input type="hidden" name="motion_is_auto" value="-1"/> 
+                    <button type = "submit" name = "motion_condition" value = "0"><image src = "/static/img/icon_onoff_sky.png"></image></button> 
+                    {% endif %}
+                </div>
+                <div class="arrow" id="motion_arrow">화살표</div>
+            </div>
+        </div> -->
+    </form>
+    </div>
+</body>
