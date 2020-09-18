@@ -1,0 +1,53 @@
+<!-- C\Code\mysite\elections\templates\elections\index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>냉난방기 page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script type = "text/javascript">
+        function onoff(btn_id) {
+            if (btn_id == "on") 
+                document.getElementById("condition").innerText = '1';
+                
+            if (btn_id == "off")
+                document.getElementById("condition").innerText = '0';
+        }
+    </script>
+</head>
+<body>
+<form  method = "GET">
+    
+    <div class="container">
+        <form  method = "GET" >
+            <table>
+                <tr>
+                    <td>온습도 &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        전원 온오프
+                        <button type = "submit" name = "temp_condition" value = "2">에어컨on</button>
+                        <button type = "submit" name = "temp_condition" value = "1">온풍기on</button>
+                        <button type = "submit" name = "temp_condition" value = "0">off</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        자동제어
+                        <button type = "submit" name = "temp_is_auto" value = "1">auto on</button>
+                        <button type = "submit" name = "temp_is_auto" value = "-1">auto off</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ temp.temp_value }}도 {{temp.humid_value}}%</td>
+                </tr>
+            </table>
+        </form>
+        <a href="/">홈으로 이동</a>
+    </div>
+</body>
