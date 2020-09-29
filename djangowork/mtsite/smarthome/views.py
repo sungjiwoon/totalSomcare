@@ -16,11 +16,30 @@ def index(request) :
     rain_row = Rainsensorinfo.objects.filter(user = 1).last()
     gas_row = Gassensorinfo.objects.filter(user = 1).last()
 
-    air_condition = air_row.situation
-    motion_condition = motion_row.situation
-    temp_condition = temp_row.situation
-    rain_condition = rain_row.situation
-    gas_condition = gas_row.situation
+    if air_row is None :   
+        air_condition = 0
+    else :
+        air_condition = air_row.situation
+
+    if motion_row is None :   
+        motion_condition = 0
+    else :
+        motion_condition = motion_row.situation
+
+    if temp_row is None :   
+        motion_condition = 0
+    else :
+        temp_condition = temp_row.situation
+
+    if rain_row is None :   
+        motion_condition = 0
+    else :
+        rain_condition = rain_row.situation
+
+    if gas_row is None :   
+        motion_condition = 0
+    else :
+        gas_condition = gas_row.situation
     
     #수동 제어 공간 
     if request.method == "GET":
