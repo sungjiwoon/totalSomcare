@@ -1,0 +1,45 @@
+<!-- C\Code\mysite\elections\templates\elections\index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>공기 청정기 page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<form  method = "GET">
+    
+    <div class="container">
+        <form  method = "GET" >
+            <table>
+                <tr>
+                    <td>공기 &nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        전원 온오프
+                        <button type = "submit" name = "air_condition" value = "3">3단</button>
+                        <button type = "submit" name = "air_condition" value = "2">2단</button>
+                        <button type = "submit" name = "air_condition" value = "1">1단</button>
+                        <button type = "submit" name = "air_condition" value = "0">off</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        자동제어
+                        <button type = "submit" name = "air_is_auto" value = "1">auto on</button>
+                        <button type = "submit" name = "air_is_auto" value = "-1">auto off</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>pm2.5: {{ air.air1_value }}㎛  |  pm10.0: {{ air.air2_value }}㎛</td>
+                </tr>
+            </table>
+        </form>
+        <a href="/">홈으로 이동</a>
+    </div>
+</body>

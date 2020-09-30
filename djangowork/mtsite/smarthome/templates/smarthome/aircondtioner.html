@@ -5,9 +5,6 @@
     <title>냉난방기 page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <meta http-equiv="refresh" content="150;url=http://localhost:8000/airconditioner/Tempsensorinfo%20object%20(6096)/">
     <script>
 		function test() {
@@ -210,7 +207,7 @@
     <div class="container">
         <div class="topbar_table">
             <div class="topbar" id="topbar_div">
-                <div id="arrow_div"><a href="main.html"><img id="arrow_img" src="/static/img/icon_arrow_home.png" alt="메인페이지 이동"></img></a></div>
+                <div id="arrow_div"><a href="/"><img id="arrow_img" src="/static/img/icon_arrow_home.png" alt="메인페이지 이동"></img></a></div>
                 <div id="title_div"><span>Air Conditioner</span></div>
                 <div id="logo_div"><img id="logo_img" src="/static/img/logo_som.png" alt="logo"></img></div>
             </div>
@@ -235,7 +232,7 @@
                             <div id="print_onoff">냉방기 ON</div>
                             {% endif %}
                             
-                            {% if temp.is_auto == -1 %}
+                            {% if temp.is_auto == -1 or temp.is_auto == 0%}
                             <div id="print_auto">자동 제어 꺼짐</div>
                             {% endif %}
                             {% if temp.is_auto == 1 %}
