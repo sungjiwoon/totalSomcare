@@ -33,7 +33,7 @@ def inputValue() :
     except KeyboardInterrupt:
         setMsg = 0
     finally:
-        return [4, setMsg, -1, -1]
+        return [4, setMsg, -1, setMsg]
         
 def outputValue(getMsg) :
     try:
@@ -46,6 +46,7 @@ def outputValue(getMsg) :
                     time.sleep(1)
                     window = 1
         elif getMsg == 0 :
+            window = -1
             print("Sunny day")                  
         else :
             print("Error")
