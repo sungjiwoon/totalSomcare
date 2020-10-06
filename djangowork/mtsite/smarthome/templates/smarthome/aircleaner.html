@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>냉난방기 page</title>
+    <title>공기청정기 page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="150;url=http://localhost:8000/airconditioner/Tempsensorinfo%20object%20(6096)/">
+    <meta http-equiv="refresh" content="150;url=http://localhost:8000/aircleaner/Airsensorinfo%20object%20(6096)/">
     <script>
 		function test() {
             window.onkeydown = function(e) {
@@ -30,6 +30,7 @@
         }
 
         function changeOnOffColor(situation) {
+
             var on1 = document.getElementById("on1");
             var on2 = document.getElementById("on2");
             var on3 = document.getElementById("on3");
@@ -42,6 +43,7 @@
                 off.style.backgroundColor = '#00b7ee';
                 off.style.color = 'white';
             }
+
             if (situation == 1) {
                 off.style.backgroundColor = '#959595';
                 on2.style.backgroundColor = '#959595';
@@ -63,13 +65,10 @@
                 on3.style.backgroundColor = '#00b7ee';
                 on3.style.color = 'white';
             }
-
-            
         }
 
         function changeIsAutoColor(isAuto) {
             var is_auto = document.getElementById("is_auto");
-
             if (isAuto == -1 || isAuto == 0) {
                 is_auto.style.backgroundColor = '#959595';
             }
@@ -82,6 +81,10 @@
 
     </script>
     <style>
+         @import url(http://www.openhiun.com/hangul/nanumbarungothic.css);
+        body {
+            font-family: 'Nanum Barun Gothic', sans-serif;
+        }
         div {
             text-align: center;
             /* border: 1px solid black; */
@@ -99,25 +102,46 @@
             width: 30px;
         }
 
-        .topbar_table, .onoff_table {
+        .topbar_table {
+            display: table;
+            width: 90%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .topbar{
+            display: table-row;
+        }
+
+        .topbar div {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .onoff_td {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .onoff_btn {
+            width : 50px;
+            font-size : 13px;
+        }
+
+        .onoff_table {
+            table-layout: fixed;
             display: table;
             width: 70%;
             margin: auto;
             text-align: center;
         }
-
-        .onoff_table {
-            table-layout: fixed;
-        }
-
-        .topbar, .onoff_tr {
+        .onoff_tr {
             display: table-row;
         }
 
-        .topbar div, .onoff_td {
-            display: table-cell;
-            /* table-layout: fixed; */
-            vertical-align: middle;
+        .is_auto_btn{
+            width : 120px;
+            font-size : 13px;
         }
 
         .print_wrap {
@@ -127,12 +151,12 @@
         }
 
         #circle_img {
-			width: 45%;
+			width: 60%;
 			vertical-align: middle;
 		}
 
         #square_img {
-			width: 60%;
+			width: 75%;
 			vertical-align: middle;
 		}
 
@@ -160,37 +184,26 @@
 			display: table-row;
 		}
 
-        #print_div1_td, .print_div2_td {
+        #print_div1_td{
 			display: table-cell;
 			vertical-align: middle;
 		}
 
         #print_onoff {
-            color: #C9F9FA;
-            padding-top: 5%;
-            font-size: 120%;
+            color: #c9f9fa;
+            padding-top: 10%;
+            font-size: 150%;
             font-weight: 600;
         }
 
         #print_auto {
             color: white;
-            font-size: 90%;
+            font-size: 100%;
         }
 
-        #situation_name, #value_name {
-            color: white;
-            font-size: 90%;
-            text-align: right;
-        }
-
-        #air_situation, #air1_value {
-            color: white;
-            font-size: 250%;
-            padding-left: 0px;
-        }
 
         .onoff_print {
-            padding-top: 7%;
+            padding-top: 8%;
             padding-bottom: 3%;
         }
 
@@ -201,19 +214,40 @@
         }
 
         .auto_print {
-            padding-top: 5%;
+            padding-top: 8%;
             padding-bottom: 1%;
         }
 
         button {
             border: 0px;
-            padding: 8px 12px 8px 12px;
+            padding: 10px 17px 10px 17px;
             border-radius: 7px;
+        }
+        .print_div2_td_name {
+            font-size: 15px;
+            text-align : center;
+            vertical-align: middle;
+            display: table-cell;
+            color: white;
+            padding-right: 10px;
+        }
+
+        .print_div2_td {
+            display: table-cell;
+			vertical-align: middle;
+            color: white;
+            font-size: 40px;
+        }
+        .print_div2_td2 {
+            display: table-cell;
+			vertical-align: middle;
+            color: white;
+            font-size: 30px;
         }
 
     </style>
 </head>
-<body onload="test(); CallbackFunction(); changeOnOffColor('{{ temp.situation }}'); changeIsAutoColor('{{ temp.is_auto }}');">
+<body onload="test(); CallbackFunction(); changeOnOffColor('{{ air.situation }}'); changeIsAutoColor('{{ air.is_auto }}');">
 <form  method = "GET">
     <div class="container">
         <div class="topbar_table">
@@ -242,7 +276,7 @@
                             {% if air.situation == 2 %}
                             <div id="print_onoff">세기 2 작동 중</div>
                             {% endif %}
-                            {% if air.situation == 2 %}
+                            {% if air.situation == 3 %}
                             <div id="print_onoff">세기 3 작동 중</div>
                             {% endif %}
                             
@@ -263,20 +297,23 @@
             <div class="print_text" id="print_div2_text">
                 <div id="print_div2_table">
                     <div class="print_div2_tr" id="print_div2_tr1">
-                        <div class="print_div2_td" id="situation_name">미세먼지<br>상태</div>
-                        {% if air.situation == 1 %}
+                        
+                        <div class="print_div2_td_name" >먼지<br>상태</text></div>
+                        {% if air.air1_value >= 17 or air.air2_value >= 10 %}
                         <div class="print_div2_td" id="air_situation">좋음</div>
                         {% endif %}
-                        {% if air.situation == 2 %}
+                        {% if air.air1_value >= 21 or air.air2_value >= 15 %}
                         <div class="print_div2_td" id="air_situation">나쁨</div>
                         {% endif %}
-                        {% if air.situation == 3 %}
-                        <div class="print_div2_td" id="air_situation">매우 나쁨</div>
+                        {% if air.air1_value >= 25 or air.air2_value >= 20 %}
+                        <div class="print_div2_td2" id="air_situation">매우 나쁨</div>
                         {% endif %}
-                        
+                        {% if air.air1_value < 17 or air.air2_value < 10 %}
+                        <div class="print_div2_td2" id="air_situation">매우 좋음</div>
+                        {% endif %}                        
                     </div>
                     <div class="print_div2_tr" id="print_div2_tr2">
-                        <div class="print_div2_td" id="value_name">농도</div>
+                        <div class="print_div2_td_name" >농도</div>
                         <div class="print_div2_td" id="air1_value">{{ air.air1_value }}㎛</div>
                     </div>
                 </div>
@@ -293,7 +330,7 @@
                 <div class="onoff_td"><button id="on1" class="onoff_btn" type="submit" name="air_condition" value="1" >1</button></div>
                 <div class="onoff_td"><button id="on2" class="onoff_btn" type="submit" name="air_condition" value="2" >2</button></div>
                 <div class="onoff_td"><button id="on3" class="onoff_btn" type="submit" name="air_condition" value="3" >3</button></div>
-                <div class="onoff_td"><button id="off" class="onoff_btn" type="submit" name="air_condition" value="0" >off</button></div>
+                <div class="onoff_td"><button id="off" class="onoff_btn" type="submit" name="air_condition" value="0" >OFF</button></div>
                 
             </div>
         </div>
@@ -308,10 +345,10 @@
 
         <div class="auto" id="auto_div">
             {% if air.is_auto == -1 or air.is_auto == 0 %}
-            <div><button id="is_auto" type="submit" name="air_is_auto" value="1" >자동 제어 켜기</button></div>
+            <div><button id="is_auto" type="submit" class="is_auto_btn" name="air_is_auto" value="1" >자동 제어 켜기</button></div>
             {% endif %}
             {% if air.is_auto == 1 %}
-            <div><button id="is_auto" type="submit" name="air_is_auto" value="-1" >자동 제어 끄기</button></div>
+            <div><button id="is_auto" type="submit" class="is_auto_btn" name="air_is_auto" value="-1" >자동 제어 끄기</button></div>
             {% endif %}
         </div>
     </div>

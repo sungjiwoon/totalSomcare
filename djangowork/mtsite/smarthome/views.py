@@ -210,6 +210,8 @@ def gascooker(request, gas) :
 def window(request, rain) :
     rain_row = Rainsensorinfo.objects.filter(user = 1).last()
     rain_condition = rain_row.situation
+    temp_row = Tempsensorinfo.objects.filter(user = 1).last()
+    temp_humid = temp_row.humid_value
 
     if request.method == "GET":
         rain_condition_recv = request.GET.get('rain_condition', None) 
@@ -219,19 +221,21 @@ def window(request, rain) :
             Rainsensorinfo.objects.create(
                 user = rain_row.user, 
                 situation = rain_row.situation, 
-                is_auto = rain_is_auto_recv
+                is_auto = rain_is_auto_recv,
+                rain_value = rain_row.rain_value
             )
 
         if rain_condition_recv != rain_condition and rain_condition_recv != None:
             Rainsensorinfo.objects.create(
                 user = rain_row.user, 
                 situation = rain_condition_recv, 
-                is_auto = 0
+                is_auto = 0,
+                rain_value = rain_row.rain_value
             )
 
         rain_row = Rainsensorinfo.objects.filter(user = rain_row.user).last()
     
-    context = {'rain' : rain_row}
+    context = {'rain' : rain_row, 'humid' : temp_humid}
     return render(request, 'smarthome/window.html', context)
 
 def lamp(request, motion) :
@@ -246,14 +250,16 @@ def lamp(request, motion) :
              Motionsensorinfo.objects.create(
                 user = motion_row.user, 
                 situation = motion_row.situation, 
-                is_auto = motion_is_auto_recv
+                is_auto = motion_is_auto_recv,
+                motion_value = motion_row.motion_value
             )
 
         if motion_condition_recv != motion_condition and motion_condition_recv != None:
              Motionsensorinfo.objects.create(
                 user = motion_row.user, 
                 situation = motion_condition_recv, 
-                is_auto = 0
+                is_auto = 0,
+                motion_value = motion_row.motion_value
             )
 
         motion_row = Motionsensorinfo.objects.filter(user = motion_row.user).last()

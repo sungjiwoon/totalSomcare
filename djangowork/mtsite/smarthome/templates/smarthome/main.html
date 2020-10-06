@@ -29,6 +29,10 @@
         }
     </script>
     <style>
+         @import url(http://www.openhiun.com/hangul/nanumbarungothic.css);
+        body {
+            font-family: 'Nanum Barun Gothic', sans-serif;
+        }
         img {
             display: block;
             width: 100%;
@@ -271,13 +275,13 @@
                         {% endif %}
                     </div>
                     <div class="value" id="air_value">
-                        {% if air.situation == 1 %}
+                        {% if air.air1_value >= 17 or air.air2_value >= 10 %}
                         <span>미세먼지 농도 : 좋음</span>
                         {% endif %}
-                        {% if air.situation == 2 %}
+                        {% if air.air1_value >= 21 or air.air2_value >= 15 %}
                         <span>미세먼지 농도 : 나쁨</span>
                         {% endif %}
-                        {% if air.situation == 3 %}
+                        {% if air.air1_value >= 25 or air.air2_value >= 20 %}
                         <span>미세먼지 농도 : 매우 나쁨</span>
                         {% endif %}
                     </div>

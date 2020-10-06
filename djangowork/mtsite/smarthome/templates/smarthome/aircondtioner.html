@@ -71,6 +71,10 @@
 
     </script>
     <style>
+         @import url(http://www.openhiun.com/hangul/nanumbarungothic.css);
+        body {
+            font-family: 'Nanum Barun Gothic', sans-serif;
+        }
         div {
             text-align: center;
             /* border: 1px solid black; */
@@ -88,16 +92,13 @@
             width: 30px;
         }
 
-        .topbar_table, .onoff_table {
+        .topbar_table {
             display: table;
             width: 90%;
             margin: auto;
             text-align: center;
         }
 
-        .onoff_table {
-            table-layout: fixed;
-        }
 
         .topbar, .onoff_tr {
             display: table-row;
@@ -165,13 +166,6 @@
             font-size: 100%;
         }
 
-        #temp, #humid {
-            color: white;
-            font-size: 110%;
-            text-align: right;
-            padding-right: 10px;
-        }
-
         #temp_value, #humid_value {
             color: white;
             font-size: 250%;
@@ -180,6 +174,22 @@
         .onoff_print {
             padding-top: 8%;
             padding-bottom: 3%;
+        }
+        .onoff_table {
+            table-layout: fixed;
+            display: table;
+            width: 70%;
+            margin: auto;
+            text-align: center;
+        }
+        .onoff_btn {
+            width : 75px;
+            font-size : 13px;
+        }
+
+        .is_auto_btn{
+            width : 120px;
+            font-size : 13px;
         }
 
         .info {
@@ -197,6 +207,14 @@
             border: 0px;
             padding: 10px 17px 10px 17px;
             border-radius: 7px;
+        }
+        .print_div2_td_name {
+            font-size: 15px;
+            text-align : center;
+            vertical-align: middle;
+            display: table-cell;
+            color: white;
+            padding-right: 10px;
         }
 
     </style>
@@ -248,11 +266,11 @@
             <div class="print_text" id="print_div2_text">
                 <div id="print_div2_table">
                     <div class="print_div2_tr" id="print_div2_tr1">
-                        <div class="print_div2_td" id="temp">온도</div>
-                        <div class="print_div2_td" id="temp_value">{{ temp.temp_value }}℃</div>
+                        <div class="print_div2_td_name" id="temp">온도</div>
+                        <div class="print_div2_td" id="temp_value">{{ temp.temp_value }}<text style="font-size:30px">℃</text></div>
                     </div>
                     <div class="print_div2_tr" id="print_div2_tr2">
-                        <div class="print_div2_td" id="humid">습도</div>
+                        <div class="print_div2_td_name" id="humid">습도</div>
                         <div class="print_div2_td" id="humid_value">{{ temp.humid_value }}%</div>
                     </div>
                 </div>
@@ -268,7 +286,7 @@
                 <input type="hidden" name="temp_is_auto" value="0"/> 
                 <div class="onoff_td"><button id="cold" class="onoff_btn" type="submit" name="temp_condition" value="2" >냉방기</button></div>
                 <div class="onoff_td"><button id="warm" class="onoff_btn" type="submit" name="temp_condition" value="1" >온풍기</button></div>
-                <div class="onoff_td"><button id="off" class="onoff_btn" type="submit" name="temp_condition" value="0" >전원OFF</button></div>
+                <div class="onoff_td"><button id="off" class="onoff_btn" type="submit" name="temp_condition" value="0" >OFF</button></div>
                 
             </div>
         </div>
@@ -283,10 +301,10 @@
 
         <div class="auto" id="auto_div">
             {% if temp.is_auto == -1 or temp.is_auto == 0 %}
-            <div><button id="is_auto" type="submit" name="temp_is_auto" value="1" >자동 제어 켜기</button></div>
+            <div><button id="is_auto" class="is_auto_btn" type="submit" name="temp_is_auto" value="1" >자동 제어 켜기</button></div>
             {% endif %}
             {% if temp.is_auto == 1 %}
-            <div><button id="is_auto" type="submit" name="temp_is_auto" value="-1" >자동 제어 끄기</button></div>
+            <div><button id="is_auto" class="is_auto_btn" type="submit" name="temp_is_auto" value="-1" >자동 제어 끄기</button></div>
             {% endif %}
         </div>
     </div>
