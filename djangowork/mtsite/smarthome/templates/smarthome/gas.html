@@ -274,12 +274,15 @@
                     <div class="print_div2_tr" id="print_div2_tr1">
                         
                         <div class="print_div2_td_name" >가스<br>상태</text></div>
-                        {% if gas.gas_value < 10 %}
+                        {% if gas.gas_value < 90 %}
                         <div class="print_div2_td" id="gas_situation">안전</div>
                         {% endif %}
-                        {% if gas.gas_value >= 10 %}
+                        {% if gas.gas_value >= 90 and  gas.gas_value < 110 %}
+                        <div class="print_div2_td" id="gas_situation">주의</div>
+                        {% endif %}   
+                        {% if gas.gas_value >= 110 %}
                         <div class="print_div2_td" id="gas_situation">위험</div>
-                        {% endif %}                       
+                        {% endif %}                      
                     </div>
                     <div class="print_div2_tr" id="print_div2_tr2">
                         <div class="print_div2_td_name" >농도</div>
