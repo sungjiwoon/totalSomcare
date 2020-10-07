@@ -89,7 +89,8 @@ def index(request) :
             Rainsensorinfo.objects.create(
                 user = rain_row.user, 
                 situation = rain_condition_recv, 
-                is_auto = rain_is_auto_recv
+                is_auto = rain_is_auto_recv,
+                rain_value = rain_row.motion_value
             )
             rain_row = Rainsensorinfo.objects.filter(user = rain_row.user).last()
 
@@ -97,7 +98,9 @@ def index(request) :
             Motionsensorinfo.objects.create(
                 user = motion_row.user, 
                 situation = motion_condition_recv, 
-                is_auto = motion_is_auto_recv
+                is_auto = motion_is_auto_recv,
+                motion_value = motion_row.motion_value
+            
             )
             motion_row = Motionsensorinfo.objects.filter(user = motion_row.user).last()
 

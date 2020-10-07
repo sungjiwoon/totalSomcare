@@ -65,9 +65,10 @@
             padding: 3% 3% 3% 3%;
             border-radius: 8px;
             background-repeat: no-repeat; 
-		    background-position: left top; 
+		    /* background-position: left top;  */
 		    /* vertical-align: top; */
             background-size: 100% 100%;
+            
         }
 
         #temp_td, #air_td, #motion_td {
@@ -149,7 +150,7 @@
         }
 
         .value span {
-            font-size: 60%;
+            font-size: 55%;
             /* color: #70A3DC; */
             color: #aca8a8;
             vertical-align: text-top;
@@ -206,7 +207,7 @@
                         <span class = "offauto">auto</span>
                         {% endif %}
                     </div>
-                    <div class="value" id="aircon_value"><span>온도:{{ temp.temp_value }}℃ 습도:{{ temp.humid_value }}%</span></div>
+                    <div class="value" id="aircon_value"><span><text style="font-size: 97%;">온도:{{ temp.temp_value }}℃ 습도:{{ temp.humid_value }}%</text></span></div>
                     <hr>
                     <div class="btn" id="aircon_btn">
                         {% if temp.situation == 0 %}
@@ -327,13 +328,13 @@
                         {% endif %}
                     </div>
                     <div class="value" id="gas_value">
-                        {% if gas.situation == 0 %}
+                        {% if gas.gas_value < 90 %}
                         <span>가스 농도 : 정상</span>
                         {% endif %}
-                        {% if gas.situation == 1 %}
+                        {% if gas.gas_value >= 90 and  gas.gas_value < 110 %}
                         <span>가스 농도 : 주의</span>
                         {% endif %}
-                        {% if gas.situation == 2 %}
+                        {% if gas.gas_value >= 110 %}
                         <span>가스 농도 : 위험</span>
                         {% endif %}
                     </div>
