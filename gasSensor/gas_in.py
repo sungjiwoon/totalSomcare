@@ -3,7 +3,7 @@
 import spidev
 import time
 
-CONST_STANDARD = 100 #가스 감지 값
+CONST_STANDARD = 100  #가스 감지 값
 
 #adc랑 라즈베리파이 spi 통신하는 코드 
 #read_spi_adc를 통해서 센서값 읽음
