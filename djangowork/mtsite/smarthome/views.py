@@ -27,17 +27,17 @@ def index(request) :
         motion_condition = motion_row.situation
 
     if temp_row is None :   
-        motion_condition = 0
+        temp_condition = 0
     else :
         temp_condition = temp_row.situation
 
     if rain_row is None :   
-        motion_condition = 0
+        rain_condition = 0
     else :
         rain_condition = rain_row.situation
 
     if gas_row is None :   
-        motion_condition = 0
+        gas_condition = 0
     else :
         gas_condition = gas_row.situation
     
@@ -90,7 +90,7 @@ def index(request) :
                 user = rain_row.user, 
                 situation = rain_condition_recv, 
                 is_auto = rain_is_auto_recv,
-                rain_value = rain_row.motion_value
+                rain_value = rain_row.rain_value
             )
             rain_row = Rainsensorinfo.objects.filter(user = rain_row.user).last()
 

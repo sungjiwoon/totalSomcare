@@ -248,7 +248,7 @@
                 <div id="print_div1_table">
                     <div id="print_div1_tr">
                         <div id="print_div1_td">
-                            {% if gas.situation == 1 or gas.situation == 2 %}
+                            {% if gas.situation == 1 or gas.situation == 2 or gas.situation == 3%}
                             <div id="print_onoff">가스 ON</div>
                             {% endif %}
                             {% if gas.situation == 0 %}
@@ -274,13 +274,13 @@
                     <div class="print_div2_tr" id="print_div2_tr1">
                         
                         <div class="print_div2_td_name" >가스<br>상태</text></div>
-                        {% if gas.gas_value < 90 %}
+                        {% if gas.gas_value < 190 %}
                         <div class="print_div2_td" id="gas_situation">정상</div>
                         {% endif %}
-                        {% if gas.gas_value >= 90 and  gas.gas_value < 110 %}
+                        {% if gas.gas_value >= 190 and  gas.gas_value < 210 %}
                         <div class="print_div2_td" id="gas_situation">주의</div>
                         {% endif %}   
-                        {% if gas.gas_value >= 110 %}
+                        {% if gas.gas_value >= 210 %}
                         <div class="print_div2_td" id="gas_situation">위험</div>
                         {% endif %}                      
                     </div>
