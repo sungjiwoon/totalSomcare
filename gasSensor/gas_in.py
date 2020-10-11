@@ -17,22 +17,25 @@ def read_spi_adc(adcChannel):
     return adcValue
 
 def inputValue():
-    setMsg = 10
     try:
+        setMsg = [5, 0, -1, 0]
         adcChannel = 0
         adcValue = read_spi_adc(adcChannel)
+        setMsg[3] = adcValue
         print("gas {}" .format(adcValue)) #가스센서에서 받은 값 출력해본다. 잘 돌아가면 주석처리 하기
         if adcValue == 0:
-            setMsg = 0
+            setMsg[1] = 0
         elif adcValue < CONST_STANDARD - 10: #기준보다 낮으면 안전함 defalut값
-            setMsg = 1
+            setMsg[1] = 1
         elif CONST_STANDARD - 10 <= adcValue <= CONST_STANDARD: #기준 근처
-            setMsg = 2
+            setMsg[1] = 2
         else: #기준보다 높으면 위험!
-            setMsg = 3
+            setMsg[1] = 3
+            
         time.sleep(1)
-    except: #키보드 누를 경우에도 -1전송
-        return -1   
-    finally:
-        spi.close()
-        return setMsg
+    except KeyboardInterrupt: #키보드 누를 경우에도 -1전송
+        setMsg[1] = -1
+
+    return setMsg
+        
+
