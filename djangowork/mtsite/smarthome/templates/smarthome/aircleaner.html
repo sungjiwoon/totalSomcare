@@ -301,14 +301,14 @@
                         <div class="print_div2_td_name" >먼지<br>상태</text></div>
                         {% if air.air1_value >= 17 or air.air2_value >= 10 %}
                         <div class="print_div2_td" id="air_situation">좋음</div>
-                        {% endif %}
-                        {% if air.air1_value >= 21 or air.air2_value >= 15 %}
+                        
+                        {% elif air.air1_value >= 21 or air.air2_value >= 15 %}
                         <div class="print_div2_td" id="air_situation">나쁨</div>
-                        {% endif %}
-                        {% if air.air1_value >= 25 or air.air2_value >= 20 %}
+                        
+                        {% elif air.air1_value >= 25 or air.air2_value >= 20 %}
                         <div class="print_div2_td2" id="air_situation">매우 나쁨</div>
-                        {% endif %}
-                        {% if air.air1_value < 17 or air.air2_value < 10 %}
+                        
+                        {% elif air.air1_value < 17 or air.air2_value < 10 %}
                         <div class="print_div2_td2" id="air_situation">매우 좋음</div>
                         {% endif %}                        
                     </div>
