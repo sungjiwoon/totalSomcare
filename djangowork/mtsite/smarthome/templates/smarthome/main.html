@@ -288,7 +288,7 @@
                     </div>
                     <hr>
                     <div class="btn" id="air_btn">
-                        {% if air.situation == 0 %}
+                        {% if air.situation == 0 or air.situation == -1 %}
                         <input type="hidden" name="air_is_auto" value="0"/> 
                         <button type="submit" name="air_condition" value="1" ><img class="condition_img" src="/static/img/icon_1_gray.png"></img></button> 
                         <button type="submit" name="air_condition" value="2" ><img class="condition_img" src="/static/img/icon_2_gray.png"></img></button> 
