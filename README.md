@@ -29,6 +29,6 @@
 https://www.youtube.com/watch?v=jqB4dv1RGsM
 
 ### ✍️ ERD 관계도
-<img width ="80%" src="https://user-images.githubusercontent.com/59862752/215270679-bdf8cd8f-5eee-45f7-9c6b-297bdfa17899.png"><br>
+<img width ="60%" src="https://user-images.githubusercontent.com/59862752/215270679-bdf8cd8f-5eee-45f7-9c6b-297bdfa17899.png"><br>
 
 
