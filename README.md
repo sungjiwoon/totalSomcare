@@ -24,6 +24,7 @@
 ### ✍️ 코드 <br>
 - 게이트웨이 서버 코드 : echoServer_send.py, echoServer_recv.py <br>
 - IoT 기기 코드 (클라이언트) : echo_client_send.py, echo_client_recv.py
+- 웹 서비스 개발 코드 : Django 폴더
 
 ### ✍️ 작동 동영상 
 https://www.youtube.com/watch?v=jqB4dv1RGsM
