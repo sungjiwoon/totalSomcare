@@ -12,10 +12,15 @@
 <br>
 
 ### ✍실행화면 <br>
-<img width ="80%" src="https://user-images.githubusercontent.com/59862752/215270092-53045189-fdc1-4848-819d-203abebbfe03.png"><br>
+
+<br>
 - 메인 페이지에서는 버튼 하나로 제어할 수 있도록 하였고, <br>
 - 상세 페이지들에서는 주변 환경의 정보들을 출력하고 제어할 수 있도록 하였습니다. <br>
 <br>
+
+![슬라이드1](https://github.com/sungjiwoon/totalSomcare/assets/59862752/e88cc1f5-5c60-441d-8a1d-57b32b465b9b)
+
+![슬라이드2](https://github.com/sungjiwoon/totalSomcare/assets/59862752/9b8d25a2-62f8-4a30-828c-b64b651b10b8)
 
 ### ✍️ 작품 구성도 <br>
 <img width ="80%" src="https://user-images.githubusercontent.com/59862752/215270674-9be5004e-760a-4215-9b42-0916d0dea0ad.png"><br>
